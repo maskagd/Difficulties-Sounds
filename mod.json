@@ -8,9 +8,9 @@
 	},
 	"id": "maskagd.difficulties_sounds",
 	"name": "Difficulties Sounds",
-	"version": "v1.0.0",
+	"version": "v1.0.1",
 	"developer": "maskagd",
-	"description": "",
+	"description": "adds custom SFX on difficulties buttons",
 	"tags": ["customization", "offline", "enhancement", "joke"],
 	"resources": {
 		"files": [

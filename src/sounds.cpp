@@ -136,7 +136,6 @@ std::string resolveBundledPath(SoundKey key) {
         }
     }
 
-    // Fallback if file lookup fails; FMOD may still resolve it.
     return Mod::get()->expandSpriteName(candidates.front());
 }
 
@@ -156,7 +155,6 @@ std::optional<std::string> resolveCustomPath(SoundKey key) {
         return std::nullopt;
     }
 
-    // File settings may hold placeholder text defaults; only use real files.
     if (!std::filesystem::exists(path) || !std::filesystem::is_regular_file(path)) {
         return std::nullopt;
     }
@@ -201,7 +199,7 @@ std::optional<SoundKey> demonSoundFromButton(std::string_view buttonID) {
     if (buttonID == "extreme-demon-filter-button") return SoundKey::DemonHard;
     return std::nullopt;
 }
-} // namespace
+} 
 
 std::optional<int> sounds::getDifficultyIndexForButton(std::string_view buttonID) {
     if (buttonID == "na-filter-button") return 0;
