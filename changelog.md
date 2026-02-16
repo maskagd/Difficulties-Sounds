@@ -1,3 +1,6 @@
+# v1.0.2
+- Added sound effects for demons
+
 # v1.0.1
 - Micro patch
 

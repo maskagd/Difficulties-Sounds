@@ -192,11 +192,11 @@ std::optional<SoundKey> difficultySoundFromButton(std::string_view buttonID) {
 
 std::optional<SoundKey> demonSoundFromButton(std::string_view buttonID) {
     if (buttonID == "all-demon-filter-button") return SoundKey::DemonHard;
-    if (buttonID == "easy-demon-filter-button") return SoundKey::DemonHard;
-    if (buttonID == "medium-demon-filter-button") return SoundKey::DemonHard;
+    if (buttonID == "easy-demon-filter-button") return SoundKey::DemonEasy;
+    if (buttonID == "medium-demon-filter-button") return SoundKey::DemonMedium;
     if (buttonID == "hard-demon-filter-button") return SoundKey::DemonHard;
-    if (buttonID == "insane-demon-filter-button") return SoundKey::DemonHard;
-    if (buttonID == "extreme-demon-filter-button") return SoundKey::DemonHard;
+    if (buttonID == "insane-demon-filter-button") return SoundKey::DemonInsane;
+    if (buttonID == "extreme-demon-filter-button") return SoundKey::DemonExtreme;
     return std::nullopt;
 }
 } 
@@ -230,4 +230,3 @@ bool sounds::playForDemonButton(std::string_view buttonID) {
     playByKey(key.value());
     return true;
 }
-
