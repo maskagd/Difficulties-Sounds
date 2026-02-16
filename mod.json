@@ -1,0 +1,219 @@
+{
+	"geode": "5.0.0-beta.2",
+	"gd": {
+		"win": "2.2081",
+		"android": "2.2081",
+		"mac": "2.2081",
+		"ios": "2.2081"
+	},
+	"id": "maskagd.difficulties_sounds",
+	"name": "Difficulties Sounds",
+	"version": "v1.0.0",
+	"developer": "maskagd",
+	"description": "",
+	"tags": ["customization", "offline", "enhancement", "joke"],
+	"resources": {
+		"files": [
+            "res/audio/jg/*.ogg",
+			"res/audio/niko/*.ogg"
+		]
+	},
+	"links": {
+        "source": "https://github.com/maskagd/difficulties-sounds",
+        "homepage": "https://www.youtube.com/@maskagd"
+    },
+	"settings": {
+		"standart-title": {
+			"type": "title",
+			"name": "Sounds settings"
+		},
+		"sound-enable": {
+			"type": "bool",
+			"name": "Enable sounds",
+			"default": true
+		},
+		"sound-volume": {
+			"type": "int",
+			"name": "sound volume",
+			"default": 50,
+			"min": 0,
+			"max": 100
+		},
+		"sound-type": {
+			"type": "string",
+			"name": "Sound Type",
+			"default": "jigglegiggle11",
+
+			"one-of": ["jigglegiggle11", "nnikzuu"]
+		},
+		"custom-title": {
+			"type": "title",
+			"name": "Custom sounds settings"
+		},
+		"sound-custom": {
+			"type": "bool",
+			"name": "Use custom sounds",
+			"default": false
+		},
+		"na-sound": {
+			"type": "file",
+			"name": "Custom NA sound",
+			"default": "audio file",
+			"control": {
+				"dialog": "open",
+				"filters": [
+					{
+					"files": ["*.wav", "*.ogg", "*.mp3", "*.flac"]
+					}
+				]
+			}
+		},
+		"auto-sound": {
+			"type": "file",
+			"name": "Custom auto sound",
+			"default": "audio file",
+			"control": {
+				"dialog": "open",
+				"filters": [
+					{
+					"files": ["*.wav", "*.ogg", "*.mp3", "*.flac"]
+					}
+				]
+			}
+		},
+		"easy-sound": {
+			"type": "file",
+			"name": "Custom easy sound",
+			"default": "audio file",
+			"control": {
+				"dialog": "open",
+				"filters": [
+					{
+					"files": ["*.wav", "*.ogg", "*.mp3", "*.flac"]
+					}
+				]
+			}
+		},
+		"normal-sound": {
+			"type": "file",
+			"name": "Custom normal sound",
+			"default": "audio file",
+			"control": {
+				"dialog": "open",
+				"filters": [
+					{
+					"files": ["*.wav", "*.ogg", "*.mp3", "*.flac"]
+					}
+				]
+			}
+		},
+		"hard-sound": {
+			"type": "file",
+			"name": "Custom hard sound",
+			"default": "audio file",
+			"control": {
+				"dialog": "open",
+				"filters": [
+					{
+					"files": ["*.wav", "*.ogg", "*.mp3", "*.flac"]
+					}
+				]
+			}
+		},
+		"harder-sound": {
+			"type": "file",
+			"name": "Custom harder sound",
+			"default": "audio file",
+			"control": {
+				"dialog": "open",
+				"filters": [
+					{
+					"files": ["*.wav", "*.ogg", "*.mp3", "*.flac"]
+					}
+				]
+			}
+		},
+		"insane-sound": {
+			"type": "file",
+			"name": "Custom insane sound",
+			"default": "audio file",
+			"control": {
+				"dialog": "open",
+				"filters": [
+					{
+					"files": ["*.wav", "*.ogg", "*.mp3", "*.flac"]
+					}
+				]
+			}
+		},
+		"easydemon-sound": {
+			"type": "file",
+			"name": "Custom easy demon sound",
+			"default": "audio file",
+			"control": {
+				"dialog": "open",
+				"filters": [
+					{
+					"files": ["*.wav", "*.ogg", "*.mp3", "*.flac"]
+					}
+				]
+			}
+		},
+		"mediumdemon-sound": {
+			"type": "file",
+			"name": "Custom medium demon sound",
+			"default": "audio file",
+			"control": {
+				"dialog": "open",
+				"filters": [
+					{
+					"files": ["*.wav", "*.ogg", "*.mp3", "*.flac"]
+					}
+				]
+			}
+		},
+		"harddemon-sound": {
+			"type": "file",
+			"name": "Custom hard demon sound",
+			"default": "audio file",
+			"control": {
+				"dialog": "open",
+				"filters": [
+					{
+					"files": ["*.wav", "*.ogg", "*.mp3", "*.flac"]
+					}
+				]
+			}
+		},
+		"insanedemon-sound": {
+			"type": "file",
+			"name": "Custom insane demon sound",
+			"default": "audio file",
+			"control": {
+				"dialog": "open",
+				"filters": [
+					{
+					"files": ["*.wav", "*.ogg", "*.mp3", "*.flac"]
+					}
+				]
+			}
+		},
+		"extremedemon-sound": {
+			"type": "file",
+			"name": "Custom extreme demon sound",
+			"default": "audio file",
+			"control": {
+				"dialog": "open",
+				"filters": [
+					{
+					"files": ["*.wav", "*.ogg", "*.mp3", "*.flac"]
+					}
+				]
+			}
+		}
+
+
+	}
+
+}
+	
