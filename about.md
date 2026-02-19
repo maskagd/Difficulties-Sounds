@@ -1,9 +1,9 @@
 # <cr>Difficulties</c> <cy>Sounds</c>
 
 ## About
-Difficulties Sounds plays audio cues whenever you select a difficulty filter in the level search menu.
+This mod adds sounds that play when you select a difficulty filter in the level search menu.
 
-Each difficulty can have its own sound. You can use the included preset voice sounds from tiktok or replace them with your own files.
+Each difficulty can have its own unique audio cue. You can use the included preset audios or replace them with your own custom sound files.
 
 ---
 
@@ -16,8 +16,7 @@ included sounds were created by:
 ---
 
 ## Suggestions
-If you want to suggest new sounds for difficulties
-
 Contact me on Discord: **maskagd**
 
+If you want to suggest new sounds for difficulties.
 I may add your sounds to future versions of the mod.

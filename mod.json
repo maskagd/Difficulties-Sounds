@@ -1,5 +1,5 @@
 {
-	"geode": "5.0.0-beta.2",
+	"geode": "5.0.0-beta.3",
 	"gd": {
 		"win": "2.2081",
 		"android": "2.2081",
@@ -8,7 +8,7 @@
 	},
 	"id": "maskagd.difficulties_sounds",
 	"name": "Difficulties Sounds",
-	"version": "v1.0.2",
+	"version": "v1.0.3",
 	"developer": "maskagd",
 	"description": "adds custom SFX on difficulties buttons",
 	"tags": ["customization", "offline", "enhancement", "joke"],
@@ -17,6 +17,9 @@
             "res/audio/jg/*.ogg",
 			"res/audio/niko/*.ogg"
 		]
+	},
+	"dependencies": {
+		"geode.node-ids": ">=v1.20.0"
 	},
 	"links": {
         "source": "https://github.com/maskagd/difficulties-sounds",
