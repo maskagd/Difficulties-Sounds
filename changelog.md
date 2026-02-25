@@ -1,3 +1,6 @@
+# v1.0.4
+- Minor adjustments to settings
+
 # v1.0.3
 - Micro patch
 
