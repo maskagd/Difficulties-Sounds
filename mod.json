@@ -40,13 +40,14 @@
 			"name": "sound volume",
 			"default": 50,
 			"min": 0,
-			"max": 100
+			"max": 200,
+			"enable-if": "sound-enable"
 		},
 		"sound-type": {
 			"type": "string",
 			"name": "Sound Type",
 			"default": "jigglegiggle11",
-
+   "enable-if": "sound-enable",
 			"one-of": ["jigglegiggle11", "nnikzuu"]
 		},
 		"custom-title": {
@@ -57,164 +58,175 @@
 			"type": "bool",
 			"name": "Use custom sounds",
 			"default": false
+			"enable-if": "sound-enable"
 		},
 		"na-sound": {
-			"type": "file",
-			"name": "Custom NA sound",
-			"default": "audio file",
-			"control": {
-				"dialog": "open",
-				"filters": [
-					{
-					"files": ["*.wav", "*.ogg", "*.mp3", "*.flac"]
-					}
-				]
+	"type": "file",
+	"name": "Custom NA sound",
+	"default": "audio file",
+	"enable-if": "sound-enable && sound-custom",
+	"control": {
+		"dialog": "open",
+		"filters": [
+			{
+				"files": ["*.wav", "*.ogg", "*.mp3", "*.flac"]
 			}
-		},
-		"auto-sound": {
-			"type": "file",
-			"name": "Custom auto sound",
-			"default": "audio file",
-			"control": {
-				"dialog": "open",
-				"filters": [
-					{
-					"files": ["*.wav", "*.ogg", "*.mp3", "*.flac"]
-					}
-				]
+		]
+	}
+},
+"auto-sound": {
+	"type": "file",
+	"name": "Custom auto sound",
+	"default": "audio file",
+	"enable-if": "sound-enable && sound-custom",
+	"control": {
+		"dialog": "open",
+		"filters": [
+			{
+				"files": ["*.wav", "*.ogg", "*.mp3", "*.flac"]
 			}
-		},
-		"easy-sound": {
-			"type": "file",
-			"name": "Custom easy sound",
-			"default": "audio file",
-			"control": {
-				"dialog": "open",
-				"filters": [
-					{
-					"files": ["*.wav", "*.ogg", "*.mp3", "*.flac"]
-					}
-				]
+		]
+	}
+},
+"easy-sound": {
+	"type": "file",
+	"name": "Custom easy sound",
+	"default": "audio file",
+	"enable-if": "sound-enable && sound-custom",
+	"control": {
+		"dialog": "open",
+		"filters": [
+			{
+				"files": ["*.wav", "*.ogg", "*.mp3", "*.flac"]
 			}
-		},
-		"normal-sound": {
-			"type": "file",
-			"name": "Custom normal sound",
-			"default": "audio file",
-			"control": {
-				"dialog": "open",
-				"filters": [
-					{
-					"files": ["*.wav", "*.ogg", "*.mp3", "*.flac"]
-					}
-				]
+		]
+	}
+},
+"normal-sound": {
+	"type": "file",
+	"name": "Custom normal sound",
+	"default": "audio file",
+	"enable-if": "sound-enable && sound-custom",
+	"control": {
+		"dialog": "open",
+		"filters": [
+			{
+				"files": ["*.wav", "*.ogg", "*.mp3", "*.flac"]
 			}
-		},
-		"hard-sound": {
-			"type": "file",
-			"name": "Custom hard sound",
-			"default": "audio file",
-			"control": {
-				"dialog": "open",
-				"filters": [
-					{
-					"files": ["*.wav", "*.ogg", "*.mp3", "*.flac"]
-					}
-				]
+		]
+	}
+},
+"hard-sound": {
+	"type": "file",
+	"name": "Custom hard sound",
+	"default": "audio file",
+	"enable-if": "sound-enable && sound-custom",
+	"control": {
+		"dialog": "open",
+		"filters": [
+			{
+				"files": ["*.wav", "*.ogg", "*.mp3", "*.flac"]
 			}
-		},
-		"harder-sound": {
-			"type": "file",
-			"name": "Custom harder sound",
-			"default": "audio file",
-			"control": {
-				"dialog": "open",
-				"filters": [
-					{
-					"files": ["*.wav", "*.ogg", "*.mp3", "*.flac"]
-					}
-				]
+		]
+	}
+},
+"harder-sound": {
+	"type": "file",
+	"name": "Custom harder sound",
+	"default": "audio file",
+	"enable-if": "sound-enable && sound-custom",
+	"control": {
+		"dialog": "open",
+		"filters": [
+			{
+				"files": ["*.wav", "*.ogg", "*.mp3", "*.flac"]
 			}
-		},
-		"insane-sound": {
-			"type": "file",
-			"name": "Custom insane sound",
-			"default": "audio file",
-			"control": {
-				"dialog": "open",
-				"filters": [
-					{
-					"files": ["*.wav", "*.ogg", "*.mp3", "*.flac"]
-					}
-				]
+		]
+	}
+},
+"insane-sound": {
+	"type": "file",
+	"name": "Custom insane sound",
+	"default": "audio file",
+	"enable-if": "sound-enable && sound-custom",
+	"control": {
+		"dialog": "open",
+		"filters": [
+			{
+				"files": ["*.wav", "*.ogg", "*.mp3", "*.flac"]
 			}
-		},
-		"easydemon-sound": {
-			"type": "file",
-			"name": "Custom easy demon sound",
-			"default": "audio file",
-			"control": {
-				"dialog": "open",
-				"filters": [
-					{
-					"files": ["*.wav", "*.ogg", "*.mp3", "*.flac"]
-					}
-				]
+		]
+	}
+},
+"easydemon-sound": {
+	"type": "file",
+	"name": "Custom easy demon sound",
+	"default": "audio file",
+	"enable-if": "sound-enable && sound-custom",
+	"control": {
+		"dialog": "open",
+		"filters": [
+			{
+				"files": ["*.wav", "*.ogg", "*.mp3", "*.flac"]
 			}
-		},
-		"mediumdemon-sound": {
-			"type": "file",
-			"name": "Custom medium demon sound",
-			"default": "audio file",
-			"control": {
-				"dialog": "open",
-				"filters": [
-					{
-					"files": ["*.wav", "*.ogg", "*.mp3", "*.flac"]
-					}
-				]
+		]
+	}
+},
+"mediumdemon-sound": {
+	"type": "file",
+	"name": "Custom medium demon sound",
+	"default": "audio file",
+	"enable-if": "sound-enable && sound-custom",
+	"control": {
+		"dialog": "open",
+		"filters": [
+			{
+				"files": ["*.wav", "*.ogg", "*.mp3", "*.flac"]
 			}
-		},
-		"harddemon-sound": {
-			"type": "file",
-			"name": "Custom hard demon sound",
-			"default": "audio file",
-			"control": {
-				"dialog": "open",
-				"filters": [
-					{
-					"files": ["*.wav", "*.ogg", "*.mp3", "*.flac"]
-					}
-				]
+		]
+	}
+},
+"harddemon-sound": {
+	"type": "file",
+	"name": "Custom hard demon sound",
+	"default": "audio file",
+	"enable-if": "sound-enable && sound-custom",
+	"control": {
+		"dialog": "open",
+		"filters": [
+			{
+				"files": ["*.wav", "*.ogg", "*.mp3", "*.flac"]
 			}
-		},
-		"insanedemon-sound": {
-			"type": "file",
-			"name": "Custom insane demon sound",
-			"default": "audio file",
-			"control": {
-				"dialog": "open",
-				"filters": [
-					{
-					"files": ["*.wav", "*.ogg", "*.mp3", "*.flac"]
-					}
-				]
+		]
+	}
+},
+"insanedemon-sound": {
+	"type": "file",
+	"name": "Custom insane demon sound",
+	"default": "audio file",
+	"enable-if": "sound-enable && sound-custom",
+	"control": {
+		"dialog": "open",
+		"filters": [
+			{
+				"files": ["*.wav", "*.ogg", "*.mp3", "*.flac"]
 			}
-		},
-		"extremedemon-sound": {
-			"type": "file",
-			"name": "Custom extreme demon sound",
-			"default": "audio file",
-			"control": {
-				"dialog": "open",
-				"filters": [
-					{
-					"files": ["*.wav", "*.ogg", "*.mp3", "*.flac"]
-					}
-				]
+		]
+	}
+},
+"extremedemon-sound": {
+	"type": "file",
+	"name": "Custom extreme demon sound",
+	"default": "audio file",
+	"enable-if": "sound-enable && sound-custom",
+	"control": {
+		"dialog": "open",
+		"filters": [
+			{
+				"files": ["*.wav", "*.ogg", "*.mp3", "*.flac"]
 			}
-		}
-
+		]
+	}
 
 	}
 
