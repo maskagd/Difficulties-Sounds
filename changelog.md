@@ -1,3 +1,6 @@
+# v1.0.4
+- bug fix
+
 # v1.0.3
 - Micro patch
 

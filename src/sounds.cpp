@@ -2,7 +2,7 @@
 
 #include <Geode/Geode.hpp>
 #include <Geode/utils/cocos.hpp>
-
+#include <Geode/utils/string.hpp>
 #include <algorithm>
 #include <filesystem>
 #include <optional>
@@ -46,7 +46,7 @@ namespace {
     float getVolume() {
         auto raw = Mod::get()->getSettingValue<int>("sound-volume");
         raw = std::clamp(raw, 0, 100);
-        return static_cast<float>(raw) / 100.0f;
+        return static_cast<float>(raw) / 50.0f;
     }
 
     std::optional<std::string_view> getCustomSettingKey(SoundKey key) {
@@ -159,7 +159,7 @@ namespace {
             return std::nullopt;
         }
 
-        return path.string();
+        return geode::utils::string::pathToString(path);
     }
 
     void playByKey(SoundKey key) {
