@@ -10,7 +10,7 @@ Each difficulty can have its own unique audio cue. You can use the included pres
 ## Credits
 included sounds were created by:
 
-- [nnikzuu](https://www.tiktok.com/@nnikzuu)
+- [nnikzuu](https://www.tiktok.com/@nnikzu_eistoikzuu)
 - [jigglegiggle11](https://www.tiktok.com/@jigglegiggle11)
 
 ---

@@ -1,3 +1,7 @@
+# v1.10
+- New soundpack Lobotomy
+- bug fix
+
 # v1.0.4
 - bug fix
 

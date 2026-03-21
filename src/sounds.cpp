@@ -32,13 +32,17 @@ namespace {
 
     enum class SoundPack {
         JG,
-        Niko
+        Niko,
+        Lobotomy
     };
 
     SoundPack getSelectedPack() {
         auto const pack = Mod::get()->getSettingValue<std::string>("sound-type");
         if (pack == "nnikzuu") {
             return SoundPack::Niko;
+        }
+        if (pack == "lobotomy") {
+            return SoundPack::Lobotomy;
         }
         return SoundPack::JG;
     }
@@ -87,6 +91,25 @@ namespace {
             }
         }
 
+        if (pack == SoundPack::Lobotomy) {
+            switch (key) {
+                case SoundKey::NA: return "lna";
+                case SoundKey::Easy: return "leasy";
+                case SoundKey::Normal: return "lnormal";
+                case SoundKey::Hard: return "lhard";
+                case SoundKey::Harder: return "lharder";
+                case SoundKey::Insane: return "linsane";
+                case SoundKey::Demon: return "lhardd";
+                case SoundKey::Auto: return "lauto";
+                case SoundKey::DemonAll: return "lhardd";
+                case SoundKey::DemonEasy: return "leasyd";
+                case SoundKey::DemonMedium: return "lmediumd";
+                case SoundKey::DemonHard: return "lhardd";
+                case SoundKey::DemonInsane: return "linsaned";
+                case SoundKey::DemonExtreme: return "lextremed";
+            }
+        }
+
         switch (key) {
             case SoundKey::NA: return "na";
             case SoundKey::Easy: return "easy";
@@ -116,17 +139,18 @@ namespace {
 
     std::string resolveBundledPath(SoundKey key) {
         auto const pack = getSelectedPack();
-        auto const folder = pack == SoundPack::Niko ? "niko" : "jg";
+        auto const folder = pack == SoundPack::Niko ? "niko" : pack == SoundPack::Lobotomy ? "lobotomy" : "jg";
+        auto const extension = pack == SoundPack::Lobotomy ? ".mp3" : ".ogg";
         auto stem = stemForPack(key, pack);
         auto capitalizedStem = makeCapitalizedExtremed(stem);
 
         std::vector<std::string> candidates = {
-            "audio/" + std::string(folder) + "/" + stem + ".ogg",
-            "audio/" + std::string(folder) + "/" + capitalizedStem + ".ogg",
-            std::string(folder) + "/" + stem + ".ogg",
-            std::string(folder) + "/" + capitalizedStem + ".ogg",
-            stem + ".ogg",
-            capitalizedStem + ".ogg",
+            "audio/" + std::string(folder) + "/" + stem + extension,
+            "audio/" + std::string(folder) + "/" + capitalizedStem + extension,
+            std::string(folder) + "/" + stem + extension,
+            std::string(folder) + "/" + capitalizedStem + extension,
+            stem + extension,
+            capitalizedStem + extension,
         };
 
         for (auto const& rel : candidates) {

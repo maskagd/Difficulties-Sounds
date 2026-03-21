@@ -8,14 +8,15 @@
 	},
 	"id": "maskagd.difficulties_sounds",
 	"name": "Difficulties Sounds",
-	"version": "v1.0.4",
+	"version": "v1.1.0",
 	"developer": "maskagd",
 	"description": "adds custom SFX on difficulties buttons",
 	"tags": ["customization", "offline", "enhancement", "joke"],
 	"resources": {
 		"files": [
             "res/audio/jg/*.ogg",
-			"res/audio/niko/*.ogg"
+			"res/audio/niko/*.ogg",
+            "res/audio/lobotomy/*.mp3"
 		]
 	},
 	"dependencies": {
@@ -38,9 +39,9 @@
 		"sound-volume": {
 			"type": "int",
 			"name": "sound volume",
-			"default": 50,
+			"default": 100,
 			"min": 0,
-			"max": 100,
+			"max": 200,
 			"enable-if": "sound-enable"
 		},
 		"sound-type": {
@@ -48,7 +49,7 @@
 			"name": "Sound Type",
 			"default": "jigglegiggle11",
 
-			"one-of": ["jigglegiggle11", "nnikzuu"],
+			"one-of": ["jigglegiggle11", "nnikzuu", "lobotomy"],
 			"enable-if": "sound-enable"
 		},
 		"custom-title": {
