@@ -21,7 +21,7 @@ class $modify(LevelSearchLayer) {
         LevelSearchLayer::toggleDifficulty(sender);
 
         if (diff.has_value() && !wasEnabled && this->checkDiff(diff.value())) {
-            sounds::playForDifficultyButton(buttonID);
+            sounds::playForDifficultyButton(typeinfo_cast<CCNode*>(sender), buttonID);
         }
     }
 };

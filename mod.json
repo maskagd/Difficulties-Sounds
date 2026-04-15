@@ -1,5 +1,5 @@
 {
-	"geode": "5.3.0",
+	"geode": "5.5.3",
 	"gd": {
 		"win": "2.2081",
 		"android": "2.2081",
@@ -8,15 +8,14 @@
 	},
 	"id": "maskagd.difficulties_sounds",
 	"name": "Difficulties Sounds",
-	"version": "v1.1.0",
+	"version": "v1.2.0",
 	"developer": "maskagd",
 	"description": "adds custom SFX on difficulties buttons",
 	"tags": ["customization", "offline", "enhancement", "joke"],
 	"resources": {
 		"files": [
-            "res/audio/jg/*.ogg",
-			"res/audio/niko/*.ogg",
-            "res/audio/lobotomy/*.mp3"
+            "res/audio/*/*.ogg",
+            "res/audio/*/*.mp3"
 		]
 	},
 	"dependencies": {
@@ -49,7 +48,7 @@
 			"name": "Sound Type",
 			"default": "jigglegiggle11",
 
-			"one-of": ["jigglegiggle11", "nnikzuu", "lobotomy"],
+			"one-of": ["jigglegiggle11", "EricVanWilderman", "lobotomy", "nnikzuu"],
 			"enable-if": "sound-enable"
 		},
 		"custom-title": {

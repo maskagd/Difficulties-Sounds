@@ -12,11 +12,14 @@ included sounds were created by:
 
 - [nnikzuu](https://www.tiktok.com/@nnikzu_eisto)
 - [jigglegiggle11](https://www.tiktok.com/@jigglegiggle11)
+- [EricVanWilderman](https://www.youtube.com/@EricVanWilderman)
 
 ---
 
 ## Suggestions
 Contact me on Discord: **maskagd**
 
-If you want to suggest new sounds for difficulties.
-I may add your sounds to future versions of the mod.
+If you want to suggest new sounds for difficulties  
+I may add your sounds to future versions of the mod
+
+**PLEASE WRITE TO ME ONLY ABOUT THIS MOD (suggestions, sounds, issues). DO NOT MESSAGE ME ABOUT UNRELATED TOPICS**

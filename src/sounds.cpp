@@ -8,7 +8,6 @@
 #include <optional>
 #include <string>
 #include <string_view>
-#include <vector>
 
 using namespace geode::prelude;
 
@@ -33,7 +32,8 @@ namespace {
     enum class SoundPack {
         JG,
         Niko,
-        Lobotomy
+        Lobotomy,
+        Eric
     };
 
     SoundPack getSelectedPack() {
@@ -43,6 +43,9 @@ namespace {
         }
         if (pack == "lobotomy") {
             return SoundPack::Lobotomy;
+        }
+        if (pack == "eric" || pack == "EricVanWilderman") {
+            return SoundPack::Eric;
         }
         return SoundPack::JG;
     }
@@ -71,45 +74,7 @@ namespace {
         }
     }
 
-    std::string stemForPack(SoundKey key, SoundPack pack) {
-        if (pack == SoundPack::Niko) {
-            switch (key) {
-                case SoundKey::NA: return "nna";
-                case SoundKey::Easy: return "neasy";
-                case SoundKey::Normal: return "nnormal";
-                case SoundKey::Hard: return "nhard";
-                case SoundKey::Harder: return "nharder";
-                case SoundKey::Insane: return "ninsane";
-                case SoundKey::Demon: return "nhardd";
-                case SoundKey::Auto: return "nauto";
-                case SoundKey::DemonAll: return "nhardd";
-                case SoundKey::DemonEasy: return "neasyd";
-                case SoundKey::DemonMedium: return "nmediumd";
-                case SoundKey::DemonHard: return "nhardd";
-                case SoundKey::DemonInsane: return "ninsaned";
-                case SoundKey::DemonExtreme: return "nextremed";
-            }
-        }
-
-        if (pack == SoundPack::Lobotomy) {
-            switch (key) {
-                case SoundKey::NA: return "lna";
-                case SoundKey::Easy: return "leasy";
-                case SoundKey::Normal: return "lnormal";
-                case SoundKey::Hard: return "lhard";
-                case SoundKey::Harder: return "lharder";
-                case SoundKey::Insane: return "linsane";
-                case SoundKey::Demon: return "lhardd";
-                case SoundKey::Auto: return "lauto";
-                case SoundKey::DemonAll: return "lhardd";
-                case SoundKey::DemonEasy: return "leasyd";
-                case SoundKey::DemonMedium: return "lmediumd";
-                case SoundKey::DemonHard: return "lhardd";
-                case SoundKey::DemonInsane: return "linsaned";
-                case SoundKey::DemonExtreme: return "lextremed";
-            }
-        }
-
+    std::string difficultyStem(SoundKey key) {
         switch (key) {
             case SoundKey::NA: return "na";
             case SoundKey::Easy: return "easy";
@@ -117,50 +82,34 @@ namespace {
             case SoundKey::Hard: return "hard";
             case SoundKey::Harder: return "harder";
             case SoundKey::Insane: return "insane";
-            case SoundKey::Demon: return "hardd";
+            case SoundKey::Demon: return "harddemon";
             case SoundKey::Auto: return "auto";
-            case SoundKey::DemonAll: return "hardd";
-            case SoundKey::DemonEasy: return "easyd";
-            case SoundKey::DemonMedium: return "mediumd";
-            case SoundKey::DemonHard: return "hardd";
-            case SoundKey::DemonInsane: return "insaned";
-            case SoundKey::DemonExtreme: return "extremed";
+            case SoundKey::DemonAll: return "harddemon";
+            case SoundKey::DemonEasy: return "easydemon";
+            case SoundKey::DemonMedium: return "mediumdemon";
+            case SoundKey::DemonHard: return "harddemon";
+            case SoundKey::DemonInsane: return "insanedemon";
+            case SoundKey::DemonExtreme: return "extremedemon";
         }
 
         return "na";
     }
 
-    std::string makeCapitalizedExtremed(std::string const& stem) {
-        if (stem == "extremed") {
-            return "Extremed";
-        }
-        return stem;
-    }
-
     std::string resolveBundledPath(SoundKey key) {
         auto const pack = getSelectedPack();
-        auto const folder = pack == SoundPack::Niko ? "niko" : pack == SoundPack::Lobotomy ? "lobotomy" : "jg";
+        auto const stem =
+            pack == SoundPack::Niko ? "niko" :
+            pack == SoundPack::Lobotomy ? "lobotomy" :
+            pack == SoundPack::Eric ? "eric" :
+            "jg";
         auto const extension = pack == SoundPack::Lobotomy ? ".mp3" : ".ogg";
-        auto stem = stemForPack(key, pack);
-        auto capitalizedStem = makeCapitalizedExtremed(stem);
-
-        std::vector<std::string> candidates = {
-            "audio/" + std::string(folder) + "/" + stem + extension,
-            "audio/" + std::string(folder) + "/" + capitalizedStem + extension,
-            std::string(folder) + "/" + stem + extension,
-            std::string(folder) + "/" + capitalizedStem + extension,
-            stem + extension,
-            capitalizedStem + extension,
-        };
-
-        for (auto const& rel : candidates) {
-            auto full = Mod::get()->expandSpriteName(rel);
-            if (cocos::fileExistsInSearchPaths(full.c_str())) {
-                return full;
-            }
+        auto const rel = std::string(stem) + "." + difficultyStem(key) + extension;
+        auto full = Mod::get()->expandSpriteName(rel);
+        if (cocos::fileExistsInSearchPaths(full.c_str())) {
+            return full;
         }
-
-        return Mod::get()->expandSpriteName(candidates.front());
+        log::warn("Bundled sound file not found: {}", rel);
+        return full;
     }
 
     std::optional<std::string> resolveCustomPath(SoundKey key) {
@@ -209,7 +158,6 @@ namespace {
         if (buttonID == "hard-filter-button") return SoundKey::Hard;
         if (buttonID == "harder-filter-button") return SoundKey::Harder;
         if (buttonID == "insane-filter-button") return SoundKey::Insane;
-        if (buttonID == "demon-filter-button") return SoundKey::DemonHard;
         if (buttonID == "auto-filter-button") return SoundKey::Auto;
         return std::nullopt;
     }
@@ -223,7 +171,65 @@ namespace {
         if (buttonID == "extreme-demon-filter-button") return SoundKey::DemonExtreme;
         return std::nullopt;
     }
-} 
+
+    bool spriteDisplaysFrame(cocos2d::CCSprite* sprite, char const* frameName) {
+        if (!sprite) {
+            return false;
+        }
+
+        auto const cache = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache();
+        if (!cache) {
+            return false;
+        }
+
+        auto const frame = cache->spriteFrameByName(frameName);
+        return frame && sprite->isFrameDisplayed(frame);
+    }
+
+    std::optional<SoundKey> demonSoundFromDifficultyFrame(cocos2d::CCSprite* sprite) {
+        if (!sprite) {
+            return std::nullopt;
+        }
+
+        if (spriteDisplaysFrame(sprite, "difficulty_07_btn2_001.png")) return SoundKey::DemonEasy;
+        if (spriteDisplaysFrame(sprite, "difficulty_08_btn2_001.png")) return SoundKey::DemonMedium;
+        if (spriteDisplaysFrame(sprite, "difficulty_06_btn2_001.png")) return SoundKey::DemonHard;
+        if (spriteDisplaysFrame(sprite, "difficulty_09_btn2_001.png")) return SoundKey::DemonInsane;
+        if (spriteDisplaysFrame(sprite, "difficulty_10_btn2_001.png")) return SoundKey::DemonExtreme;
+        return std::nullopt;
+    }
+
+    std::optional<SoundKey> demonSoundFromDifficultyButton(cocos2d::CCNode* node) {
+        if (!node) {
+            return std::nullopt;
+        }
+
+        if (auto directSprite = typeinfo_cast<cocos2d::CCSprite*>(node->getChildByIndex(0))) {
+            if (auto key = demonSoundFromDifficultyFrame(directSprite)) {
+                return key;
+            }
+        }
+
+        if (auto sprite = typeinfo_cast<cocos2d::CCSprite*>(node)) {
+            if (auto key = demonSoundFromDifficultyFrame(sprite)) {
+                return key;
+            }
+        }
+
+        auto const children = node->getChildren();
+        if (!children) {
+            return std::nullopt;
+        }
+
+        for (auto child : geode::cocos::CCArrayExt<cocos2d::CCNode*, false>(children)) {
+            if (auto key = demonSoundFromDifficultyButton(child)) {
+                return key;
+            }
+        }
+
+        return std::nullopt;
+    }
+}
 
 std::optional<int> sounds::getDifficultyIndexForButton(std::string_view buttonID) {
     if (buttonID == "na-filter-button") return 0;
@@ -237,8 +243,12 @@ std::optional<int> sounds::getDifficultyIndexForButton(std::string_view buttonID
     return std::nullopt;
 }
 
-bool sounds::playForDifficultyButton(std::string_view buttonID) {
-    auto const key = difficultySoundFromButton(buttonID);
+bool sounds::playForDifficultyButton(cocos2d::CCNode* buttonNode, std::string_view buttonID) {
+    auto key = difficultySoundFromButton(buttonID);
+    if (buttonID == "demon-filter-button") {
+        key = demonSoundFromDifficultyButton(buttonNode).value_or(SoundKey::DemonHard);
+    }
+
     if (!key.has_value()) {
         return false;
     }

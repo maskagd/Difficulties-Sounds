@@ -1,3 +1,8 @@
+# v1.2.0
+- New EricVanWilderman soundpack
+- New logo with EricVanWilderman face
+- Bug fixes
+
 # v1.10
 - New soundpack Lobotomy
 - bug fix
