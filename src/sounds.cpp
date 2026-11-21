@@ -52,8 +52,7 @@ namespace {
 
     float getVolume() {
         auto raw = Mod::get()->getSettingValue<int>("sound-volume");
-        raw = std::clamp(raw, 0, 100);
-        return static_cast<float>(raw) / 50.0f;
+        return static_cast<float>(raw) / 25.0f;
     }
 
     std::optional<std::string_view> getCustomSettingKey(SoundKey key) {
@@ -95,60 +94,76 @@ namespace {
         return "na";
     }
 
+    std::string getSoundPackStem(SoundPack pack) {
+        if (pack == SoundPack::Niko)
+            return "niko";
+        if (pack == SoundPack::Lobotomy)
+            return "lobotomy";
+        if (pack == SoundPack::Eric)
+            return "eric";
+
+        return "jg";
+    }
+
     std::string resolveBundledPath(SoundKey key) {
-        auto const pack = getSelectedPack();
-        auto const stem =
-            pack == SoundPack::Niko ? "niko" :
-            pack == SoundPack::Lobotomy ? "lobotomy" :
-            pack == SoundPack::Eric ? "eric" :
-            "jg";
-        auto const extension = pack == SoundPack::Lobotomy ? ".mp3" : ".ogg";
-        auto const rel = std::string(stem) + "." + difficultyStem(key) + extension;
+        auto pack = getSelectedPack();
+
+        std::string rel = getSoundPackStem(pack) + "." + difficultyStem(key) + ".ogg";
         auto full = Mod::get()->expandSpriteName(rel);
+
         if (cocos::fileExistsInSearchPaths(full.c_str())) {
             return full;
         }
+
         log::warn("Bundled sound file not found: {}", rel);
         return full;
     }
 
     std::optional<std::string> resolveCustomPath(SoundKey key) {
-        auto const customEnabled = Mod::get()->getSettingValue<bool>("sound-custom");
+        auto customEnabled = Mod::get()->getSettingValue<bool>("sound-custom");
         if (!customEnabled) {
             return std::nullopt;
         }
 
-        auto const customKey = getCustomSettingKey(key);
+        auto customKey = getCustomSettingKey(key);
         if (!customKey.has_value()) {
             return std::nullopt;
         }
 
-        auto const path = Mod::get()->getSettingValue<std::filesystem::path>(customKey.value());
-        if (path.empty()) {
+        auto path = Mod::get()->getSettingValue<asp::fs::Path>(customKey.value());
+
+        if (!path.exists() || !path.isFile()) {
             return std::nullopt;
         }
 
-        if (!std::filesystem::exists(path) || !std::filesystem::is_regular_file(path)) {
-            return std::nullopt;
-        }
-
-        return geode::utils::string::pathToString(path);
+        return path.string();
     }
 
-    void playByKey(SoundKey key) {
+    bool playByKey(SoundKey key) {
         if (!Mod::get()->getSettingValue<bool>("sound-enable")) {
-            return;
+            return false;
         }
 
-        auto const volume = getVolume();
+        auto volume = getVolume();
         if (volume <= 0.0f) {
-            return;
+            return false;
         }
 
-        auto const custom = resolveCustomPath(key);
-        auto const path = custom.has_value() ? custom.value() : resolveBundledPath(key);
+        auto custom = resolveCustomPath(key);
+        auto path = custom.has_value() ? custom.value() : resolveBundledPath(key);
 
-        FMODAudioEngine::get()->playEffect(path, 1.0f, 1.0f, volume);
+        if (path.empty()) {
+            log::warn("Cannot play sound for key: empty path");
+            return false;
+        }
+
+        auto result = FMODAudioEngine::get()->playEffect(path, 1.0f, 1.0f, volume);
+        if (result < 0) {
+            log::warn("Failed to play sound: {}", path);
+            return false;
+        }
+
+        return true;
     }
 
     std::optional<SoundKey> difficultySoundFromButton(std::string_view buttonID) {
@@ -252,8 +267,7 @@ bool sounds::playForDifficultyButton(cocos2d::CCNode* buttonNode, std::string_vi
     if (!key.has_value()) {
         return false;
     }
-    playByKey(key.value());
-    return true;
+    return playByKey(key.value());
 }
 
 bool sounds::playForDemonButton(std::string_view buttonID) {
@@ -261,6 +275,5 @@ bool sounds::playForDemonButton(std::string_view buttonID) {
     if (!key.has_value()) {
         return false;
     }
-    playByKey(key.value());
-    return true;
+    return playByKey(key.value());
 }

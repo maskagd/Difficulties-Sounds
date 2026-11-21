@@ -1,3 +1,8 @@
+# v1.2.1
+- Ported to 2.2091 (geode 6.0.0-1.beta)
+- code change
+- returned logo
+
 # v1.2.0
 - New EricVanWilderman soundpack
 - New logo with EricVanWilderman face
