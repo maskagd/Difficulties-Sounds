@@ -1,7 +1,7 @@
 # v1.2.1
-- Ported to 2.2091 (geode 6.0.0-1.beta)
-- code change
-- returned logo
+- Ported to Geometry Dash 2.2091 (Geode 6.0.0)
+- restored old logo
+- Finally fixed the mod name grammar
 
 # v1.2.0
 - New EricVanWilderman soundpack
